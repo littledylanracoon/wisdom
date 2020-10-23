@@ -1,0 +1,19 @@
+#include<iostream>
+#include<math.h>
+#include<vector>
+#include<iomanip>
+#include<time.h>
+using namespace std;
+
+int main(){
+ srand(time(NULL));
+            double a = (double) rand() / (RAND_MAX + 1);  //產生-1-0的亂數
+            double b = (double) rand() / (RAND_MAX);  //產生0-1的亂數
+            cout << a << endl << b;
+
+}
+
+
+
+
+
