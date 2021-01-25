@@ -1,0 +1,101 @@
+大部分正確ㄉ大數
+
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+void add(char a[], char b[], char res[]);
+
+int main(){
+    char a[100], b[100], res[105];
+    scanf("%s %s", a, b);
+    add(a, b, res);
+    printf("%s", res);
+    return 0;
+}
+void add(char a[], char b[], char res[]){
+    for(int i = 0; i < 105; i++)
+        res[i] = '\0';
+    _Bool test = 0;
+    int lengtha, lengthb, lengthc, i, k, counta, countb, t,aa;
+    char temp,keep;
+    for(i = 0;;i++){
+        if(a[i] == '\0')
+            break;
+    }
+    lengtha = i;
+    for(i = 0; i < lengtha / 2; i++){
+         temp = a[i];
+         a[i] = a[lengtha-i-1];
+         a[lengtha-i-1] = temp;
+    } 
+    printf("a=%s\n",a);
+    for(i = 0;;i++){
+        if(b[i] == '\0')
+            break;
+    }
+    lengthb = i;
+    for(i = 0; i < lengthb / 2; i++){
+         temp = b[i];
+         b[i] = b[lengthb-i-1];
+         b[lengthb-i-1] = temp;
+    } 
+    printf("b=%s\n",b);
+    if(lengthb < lengtha){
+        k = lengtha;
+        t = lengthb;
+    }
+    else{
+        k = lengthb;
+        t = lengtha;
+    }
+    for(i = 0; i < k; i++){
+        if(i < t){
+            aa = a[i] - '0';
+            int bb = b[i] - '0';
+            counta = aa + bb;
+            printf("%d %d %d\n", aa, bb, counta);
+            if(test == 1)
+                counta++;
+            if(counta >= 10){
+                test = 1;
+                counta -= 10;
+            }
+            else
+                test = 0;
+            //itoa(counta, res[i], 10);
+            sprintf(res + i, "%d", counta);
+        }
+        else{
+            if(i == t){
+                if(test == 1){
+                    aa = res[i] - '0';
+                    aa++;
+                    sprintf(res + i, "%d", aa);
+                }
+            }
+            //printf("i = %d a[i]= %c b[i]= %c \n", i, a[i], b[i]);
+            if(k == lengtha){
+                res[i] = a[i];
+                printf("go %c\n", res[i]);
+            }
+            else{
+                res[i] = b[i];
+                printf("gogo %c\n", res[i]);
+            }
+        }
+        printf("res=%s\n",res);
+        //snprintf(keep, "%d", counta);
+        //res[i] = keep;
+    }
+    printf("res=%s\n",res);
+    for(i = 0;;i++){
+        if(res[i] == '\0')
+            break;
+    }
+    lengthc = i;
+    for(i = 0;i < lengthc / 2; i++){
+         temp = res[i];
+         res[i] = res[lengthc-i-1];
+         res[lengthc-i-1] = temp;
+    } 
+}
