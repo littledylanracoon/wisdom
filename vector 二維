@@ -1,0 +1,22 @@
+C++——二維vector初始化大小方法
+
+1.直接用初始化方法
+名字為vec，大小為n*m，初始值為0的二維vector。
+vector<vector<int> > vec(n, vector<int>(m, 0));
+
+2.用resize()來控制大小
+vector<vector<int> > vec;
+    vec.resize(n);//n行
+    for (int i = 0; i < n; ++i){
+        vec[i].resize(m);//每行為m列
+    }
+    
+3.vector<vector<int>> stones = {{0,0},{0,1},{1,0},{1,2},{2,1},{2,2}};
+
+初始化二維陣列
+
+vector<vector <int> > ivec(m ,vector<int>(n,0));    
+
+//m*n的二維vector，所有元素為0
+
+https://www.itread01.com/content/1546469675.html
