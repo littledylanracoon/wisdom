@@ -1,0 +1,15 @@
+For two strings s and t, we say "t divides s" if and only if s = t + ... + t  (t concatenated with itself 1 or more times)
+Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.
+
+class Solution {
+public:
+    string gcdOfStrings(string s1, string s2) 
+    {
+        if(s1+s2==s2+s1)
+        {
+            int t=gcd( s1.length() , s2.length() );
+            return s1.substr(0,t );
+        }
+        return "";
+    }
+};
