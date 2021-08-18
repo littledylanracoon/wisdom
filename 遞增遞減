@@ -1,0 +1,9 @@
+bool isMonotonic(vector<int>& a) {
+        bool flag=1,flag1=1;
+        for(int i=1;i<a.size();i++){
+            if(a[i-1]>a[i]) flag=0;
+            if(a[i-1]<a[i]) flag1=0;
+        }
+        
+        return flag | flag1;
+}
