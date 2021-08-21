@@ -1,0 +1,2 @@
+vector累加: right=accumulate(nums.begin(),nums.end(),0);
+        
