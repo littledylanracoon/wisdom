@@ -1,2 +1,9 @@
 vector累加: right=accumulate(nums.begin(),nums.end(),0);
-        
+
+vector內元素累加：
+int f[26]={0};
+for(int i=0;i<words.size();i++){
+         for(int j=0;j<words[i].size();j++){
+                 f[words[i][j]-'a']++;
+         }
+}
