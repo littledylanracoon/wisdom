@@ -1,0 +1,157 @@
+https://xuansheng.pixnet.net/blog/post/39024077-%E8%80%81%E9%BC%A0%E8%B5%B0%E8%BF%B7%E5%AE%AE
+
+https://liuxiaozhu.github.io/algorithm-test/AlgorithmGossip/MouseGoMaze.htm
+public class HelloWorld {
+   private int startI, startJ;  // 入口 
+   private int endI, endJ;  // 出口
+   private boolean success = false;
+   
+   public static void main(String[] args) {
+       int[][] maze = {{2, 2, 2, 2, 2, 2, 2}, 
+                       {0, 0, 0, 0, 0, 0, 2}, 
+                       {2, 0, 2, 0, 2, 0, 2}, 
+                       {2, 0, 0, 2, 0, 2, 2}, 
+                       {2, 2, 0, 2, 0, 2, 2}, 
+                       {2, 0, 0, 0, 0, 0, 2}, 
+                       {2, 2, 2, 2, 2, 0, 2}};
+       
+       System.out.println("顯示迷宮："); 
+       for(int i = 0; i < maze.length; i++) { 
+           for(int j = 0; j < maze[0].length; j++) 
+               if(maze[i][j] == 2) 
+                   System.out.print("██"); 
+               else 
+                   System.out.print("  "); 
+           System.out.println(); 
+       }
+
+       HelloWorld mouse = new HelloWorld();
+       mouse.setStart(1, 1);
+       mouse.setEnd(5, 5);
+       
+       if(!mouse.go(maze)) {
+           System.out.println("\n沒有找到出口！");
+       }
+       else {
+           System.out.println("\n找到出口！");
+           for(int i = 0; i < maze.length; i++) { 
+               for(int j = 0; j < maze[0].length; j++) { 
+                   if(maze[i][j] == 2) 
+                       System.out.print("██"); 
+                   else if(maze[i][j] == 1) 
+                       System.out.print("Ｍ"); 
+                   else 
+                       System.out.print("  "); 
+               } 
+               System.out.println(); 
+           }            
+       }
+   }
+   
+   public void setStart(int i, int j) {
+       this.startI = i;
+       this.startJ = j;
+   }
+   
+   public void setEnd(int i, int j) {
+       this.endI = i;
+       this.endJ = j;
+   }
+   
+   public boolean go(int[][] maze) {
+       return visit(maze, startI, startJ);
+   }
+   
+   private boolean visit(int[][] maze, int i, int j) {
+       maze[i][j] = 1; 
+
+       if(i == endI && j == endJ) 
+           success = true; 
+
+       if(!success && maze[i][j+1] == 0) 
+           visit(maze, i, j+1); 
+       if(!success && maze[i+1][j] == 0)
+           visit(maze, i+1, j); 
+       if(!success && maze[i][j-1] == 0)
+           visit(maze, i, j-1); 
+       if(!success && maze[i-1][j] == 0)
+           visit(maze, i-1, j); 
+
+       if(!success) 
+           maze[i][j] = 0; 
+       
+       return success; 
+   }
+}
+
+https://openhome.cc/zh-tw/algorithm/basics/maze/
+import static java.lang.System.out;
+
+class Point {
+    final int x;
+    final int y;
+    Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+interface Boss {
+    void take(int[][] maze);
+}
+
+public class HelloWorld {    
+    public static void visit(int[][] maze, Point pt, Point end, Boss boss) {
+        if(isVisitable(maze, pt)) {
+            maze[pt.x][pt.y] = 1;
+            if(isEnd(maze, end)) {
+               out.println("success");
+                boss.take(maze); //print maze
+            } else {
+                visit(maze, new Point(pt.x, pt.y + 1), end, boss);
+                visit(maze, new Point(pt.x + 1, pt.y), end, boss);
+                visit(maze, new Point(pt.x, pt.y - 1), end, boss);
+                visit(maze, new Point(pt.x - 1, pt.y), end, boss);
+            }
+            maze[pt.x][pt.y] = 0;
+        }
+    }
+
+    private static boolean isVisitable(int[][] maze, Point pt) {
+        return maze[pt.x][pt.y] == 0;
+    }
+    
+    public static boolean isEnd(int[][] maze, Point end) {
+        return maze[end.x][end.y] == 1;
+    }
+    
+    public static void main(String[] args) {
+    
+      HelloWorld.visit(new int[][] {
+        
+            {2, 2, 2, 2, 2, 2, 2, 2, 2},
+            {2, 0, 0, 0, 0, 0, 0, 0, 2},
+            {2, 0, 2, 2, 0, 2, 2, 0, 2},
+            {2, 0, 2, 0, 0, 2, 0, 0, 2},
+            {2, 0, 2, 0, 2, 0, 2, 0, 2},
+            {2, 0, 0, 0, 0, 0, 2, 0, 2},
+            {2, 2, 0, 2, 2, 0, 2, 2, 2},
+            {2, 0, 0, 0, 0, 0, 0, 0, 2},
+            {2, 2, 2, 2, 2, 2, 2, 2, 2}},
+                        
+            new Point(1, 1), new Point(7, 7), 
+
+            // JDK8 Lambda
+            maze -> {  //implementation of interface take()
+                for(int[] row : maze) {
+                    for(int block : row) switch(block) {
+                        case 0: out.print("  "); break;
+                        case 1: out.print("Ｍ"); break;
+                        case 2: out.print("██");
+                    }
+                    out.println();
+                }
+            }
+        );
+    }
+} 
